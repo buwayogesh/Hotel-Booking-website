@@ -3,42 +3,45 @@
 
 // This template has no custom styling
 // Insert any custom SCSS here!
-.btn{
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
+.navbar{
+    background-color: rgb(71, 5, 64);
 }
+.signin{
+    background-color: rgb(173 21 157 / 54%);
+    border-radius: 5px;
+    color: black;
+
+
+ }
 .container1{
-    background-image: url("../assets/hotelimg1.jpg");
-    height:900px;  
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-        
-       
+  background-image: url(../assets/lobby1.jpg);
+  height: 550px;
+//   margin-left: -75px;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+//   background-color: aqua;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.div1{
-    margin-top: 50px;
+.btn{
+    background-color: transparent;
+    font-size: 30px;
+    // border: 2px solid rgb(110, 6, 6);
+    border-radius: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-weight: bolder;
+    color: rgb(236 145 246);
+  
 }
-.label1{
-    font-weight: 25px;
-    
-}
-.label2{
-    font-weight: 25px;
-}
-.input1{
-    font-size: 14px;
-    width: 250px;
-    line-height: 50px;
-}
-.input2{
-    font-size: 14px;
-    width: 250px;
-    line-height: 50px;
+.btn:hover{
+    color: white;
+    background-color: rgb(173 21 157 / 54%);
+  
 }
