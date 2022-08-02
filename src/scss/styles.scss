@@ -3,3 +3,45 @@
 
 // This template has no custom styling
 // Insert any custom SCSS here!
+.navbar{
+    background-color: rgb(71, 5, 64);
+}
+.signin{
+    background-color: rgb(173 21 157 / 54%);
+    border-radius: 5px;
+    color: black;
+
+
+ }
+.container1{
+  background-image: url(../assets/lobby1.jpg);
+  height: 550px;
+//   margin-left: -75px;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+//   background-color: aqua;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn{
+    background-color: transparent;
+    font-size: 30px;
+    // border: 2px solid rgb(110, 6, 6);
+    border-radius: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-weight: bolder;
+    color: rgb(236 145 246);
+  
+}
+.btn:hover{
+    color: white;
+    background-color: rgb(173 21 157 / 54%);
+  
+}
