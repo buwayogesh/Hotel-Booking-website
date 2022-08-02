@@ -11286,3 +11286,46 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+.btn {
+  background-color: #4CAF50;
+  /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.container1 {
+  background-image: url("../assets/hotelimg1.jpg");
+  height: 900px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.div1 {
+  margin-top: 50px;
+}
+
+.label1 {
+  font-weight: 25px;
+}
+
+.label2 {
+  font-weight: 25px;
+}
+
+.input1 {
+  font-size: 14px;
+  width: 250px;
+  line-height: 50px;
+}
+
+.input2 {
+  font-size: 14px;
+  width: 250px;
+  line-height: 50px;
+}
