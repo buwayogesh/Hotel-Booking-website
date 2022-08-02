@@ -27,5 +27,5 @@ document.querySelector('.btn.bookbtn').addEventListener('click',function(e){
       html += '</div>'
       html += '</div>'
       form.innerHTML=html;
-      document.querySelector('.container-fluid').appendChild(form);
+      document.querySelector('.container1').appendChild(form);
 })
