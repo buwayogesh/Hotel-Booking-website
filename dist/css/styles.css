@@ -11324,3 +11324,19 @@ textarea.form-control-lg {
   color: white;
   background-color: rgba(173, 21, 157, 0.54);
 }
+
+.div {
+  float: left;
+}
+
+.ckavailbtn {
+  width: 100%;
+}
+
+.card {
+  float: left;
+  width: 400px;
+  height: 400px;
+  background-color: #470540;
+  color: white;
+}
