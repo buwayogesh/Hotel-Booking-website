@@ -4,7 +4,7 @@
 * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-bare/blob/master/LICENSE)
 */
 document.querySelector('.btn.bookbtn').addEventListener('click',function(e){
-    document.querySelector('.div').remove();
+    document.querySelector('.div1').remove();
 //    var input=document.createElement('input');
 //    input.setAttribute('type','date');
 //    document.querySelector('.container1').appendChild(input);
@@ -27,5 +27,5 @@ document.querySelector('.btn.bookbtn').addEventListener('click',function(e){
       html += '</div>'
       html += '</div>'
       form.innerHTML=html;
-      document.querySelector('.container1').appendChild(form);
+      document.querySelector('.container-fluid').appendChild(form);
 })

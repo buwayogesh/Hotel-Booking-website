@@ -1,5 +1,5 @@
 document.querySelector('.btn.bookbtn').addEventListener('click',function(e){
-    document.querySelector('.div').remove();
+    document.querySelector('.div1').remove();
 //    var input=document.createElement('input');
 //    input.setAttribute('type','date');
 //    document.querySelector('.container1').appendChild(input);
