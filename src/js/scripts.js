@@ -1,5 +1,6 @@
 document.querySelector('.btn.bookbtn').addEventListener('click',function(e){
     document.querySelector('.div1').remove();
+    document.querySelector('.navbar').remove();
 //    var input=document.createElement('input');
 //    input.setAttribute('type','date');
 //    document.querySelector('.container1').appendChild(input);
@@ -10,6 +11,7 @@ document.querySelector('.btn.bookbtn').addEventListener('click',function(e){
     //   html += '<div class="d-flex justify-content-around">'
       html += '<div class="card">'
       html += '<div class="card-body">'
+      html += '<img src="./assets/logo.jpg" alt="logo" style="height: 100px; width: 100px" />'
       html += '<div class="d-flex justify-content-between">'
       html += '<label class="label1 col-sm-5 col-form-label"><b>Check In:</b></label>'
       html += '<input type="date" class="input1">'
@@ -18,7 +20,7 @@ document.querySelector('.btn.bookbtn').addEventListener('click',function(e){
       html += '<label class="label2 col-sm-5 col-form-label"><b>Check out:</b></label>'
       html += '<input type="date" class="input2">'
       html += '</div><br>'
-      html += '<button class="ckavailbtn">Check Availability</button>'
+      html += '<button class="ckavailbtn"><strong>Check Availability</strong></button>'
       html += '</div>'
       html += '</div>'
       form.innerHTML=html;
