@@ -1,5 +1,6 @@
 // Import Bootstrap
 @import "bootstrap/scss/bootstrap.scss";
+@import "./payment.scss";
 
 // This template has no custom styling
 // Insert any custom SCSS here!
@@ -9,7 +10,6 @@
 }
 .btn-signin{
     background-color: rgb(173 21 157 / 54%);
-    border-radius: 5px;
     color: black;
 
 
@@ -20,42 +20,38 @@
   background-repeat: no-repeat;
   background-size: cover;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: calc(100vh - 116px);
+  min-height: 100vh;
+  &.hero-bg-container-navbar {
+    height: calc(100vh - 116px);
+  }
 }
+
+
 .btn-book{
     background-color: transparent;
-    font-size: 30px;
-
-    border-radius: 10px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    font-weight: bolder;
     color: rgb(236 145 246);
   
 }
-.btn:hover{
+.btn-book:hover{
     color: white;
     background-color: rgb(173 21 157 / 54%);
   
 }
 
-.check-available-btn{
+.btn-check-availability{
    background-color: green;
    color: white;
 }
-.check-avail-card{
-    background-color:rgb(71, 5, 64);
-    color:white;
-    
+.card-bg-color{
+    background-color:#804229a1;
+    color: honeydew
 }
-
-
-
-
-
-
+.card-header{
+    background-color: #746633b0;
+}
+.card-body{
+    background-color: #F6F6CA;
+}
+.card-footer{
+    background-color: #746633b0;
+}

@@ -10,35 +10,35 @@
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
-        <link href="css/paymentpage.css" rel="stylesheet" />
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" />
-        <link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
     </head>
     <body>
         <!-- Responsive navbar-->
-        <nav class="navbar navbar-expand-lg sticky-top">
+        <nav class="navbar navbar-expand-lg sticky-top nav-bg-color">
             <div class="container">
                 <a class="navbar-brand" href="#"></a>
                 <img src="./assets/logo.jpg" alt="logo" style="height: 100px; width: 100px" />
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <button class="signin">Sign In</button>
+                        <button class="btn-signin rounded-2" onclick="signin()">Sign In</button>
                     </ul>
                 </div>
             </div>
         </nav>
         <!-- Page content-->
-        <div class="container-fluid container1 hero-bg-container"></div>
-        <div class="booking"><button class="btn bookbtn btn-outline" type="button">Book Now</button></div>
+        <div class="container-fluid hero-bg-container hero-bg-container-navbar d-flex justify-content-center align-items-center"><button class="btn btn-book fs-5 rounded-3 px-20 py-10 fw-bolder btn-outline" type="button">Book Now</button></div>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
-        <script src="js/userInfo.js"></script>
-        <script src="js/buildUserInformation.js"></script>
-        <script src="js/paymentPage.js"></script>
+        <script src="js/availability.js"></script>
+        <script src="js/signin.js"></script>
+        <script src="js/confirmation.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     </body>
 </html>
