@@ -4,10 +4,10 @@
 // This template has no custom styling
 // Insert any custom SCSS here!
 
-.navbar{
+.nav-bg-color{
     background-color: rgb(71, 5, 64);
 }
-.signin{
+.btn-signin{
     background-color: rgb(173 21 157 / 54%);
     border-radius: 5px;
     color: black;
@@ -25,7 +25,7 @@
   justify-content: center;
   height: calc(100vh - 116px);
 }
-.btn{
+.btn-book{
     background-color: transparent;
     font-size: 30px;
 
@@ -43,28 +43,19 @@
     background-color: rgb(173 21 157 / 54%);
   
 }
-.div{
-    float: left;
-}
-.ckavailbtn{
-   width:100%;
-   border-radius: 8px;
+
+.check-available-btn{
    background-color: green;
    color: white;
-   line-height: 35px;
 }
-.card{
-    float:left;
-    width: 500px;
-    height:300px;
+.check-avail-card{
     background-color:rgb(71, 5, 64);
-    opacity: 0.7;
     color:white;
     
 }
-.input1{
-    width:200px;
-}
-.input2{
-    width:200px;
-}
+
+
+
+
+
+
