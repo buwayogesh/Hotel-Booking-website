@@ -11,37 +11,79 @@ function availability() {
         if (response && response.status == 'ok') {
             const roomDetailsContainer = document.createElement('div');
             roomDetailsContainer.id = 'roomdetails';
-            roomDetailsContainer.className = ' container  roomdetails';
+            roomDetailsContainer.className = 'row container roomdetails';
             let html = '';
             response.rooms.forEach(room => {
                 html += buildRoomRow(room);
-                
             });
-            html += selectroom();
             roomDetailsContainer.innerHTML = html;
-            document.querySelector('.hero-bg-container').appendChild(roomDetailsContainer);
+            const heroContainer = document.querySelector('.hero-bg-container')
+            heroContainer.appendChild(roomDetailsContainer);
+            
             roomDetailsContainer.querySelectorAll('.room-selector').forEach(node => {
                 node.addEventListener('click', (e) => {
                     e.stopPropagation();
                     let currentNoOfRooms = Number(e.target.parentElement.querySelector('.no-of-rooms').textContent);
+                    // TODO check there is div for adding or updating final room selection
+                    let selectedRoomDetailsContainer = heroContainer.querySelector('.selected-room-details-container');
+                    if (!selectedRoomDetailsContainer) {
+                        selectedRoomDetailsContainer = document.createElement('div');
+                        selectedRoomDetailsContainer.className = 'selected-room-details-container';
+                        heroContainer.appendChild(selectedRoomDetailsContainer);
+                    }
+                    const selectedRoomId = e.target.closest('.card')?.dataset?.roomId;
+                   
                     if (e.target.dataset.id == 'plus') {
                         e.target.parentElement.querySelector('.no-of-rooms').textContent = currentNoOfRooms+1;
+                        if (selectedRoomId) {
+                            const selectedRoom = selectedRoomDetailsContainer.querySelector(`#room-${selectedRoomId}`);
+                            if (selectedRoom) {
+                                const roomPriceNode = selectedRoom.querySelector('.selected-room-prize');
+                                roomPriceNode.textContent = (Number(roomPriceNode.textContent)/currentNoOfRooms) * (currentNoOfRooms+1);
+                                document.querySelector('#totalAmount').textContent = (Number(roomPriceNode.textContent)/currentNoOfRooms) * (currentNoOfRooms+1);
+                            } else {
+                                const room = response.rooms.find((room) => room._id === selectedRoomId);
+                                let selectedRoomHTML = buildSelectedRoom(room);
+                                    // selectedRoomHTML += buildTotalAmount(room) 
+                                const el = document.createElement("div");
+                                el.innerHTML = selectedRoomHTML.trim();
+                                selectedRoomDetailsContainer.appendChild(el.firstChild);
+                            }
+                        }
                     } else {
                         e.target.parentElement.querySelector('.no-of-rooms').textContent = currentNoOfRooms-1;
+                        if (selectedRoomId) {
+                            const selectedRoom = selectedRoomDetailsContainer.querySelector(`#room-${selectedRoomId}`)
+                            if (selectedRoom) {
+                                if(currentNoOfRooms == 1) {
+                                    selectedRoom.remove();
+                                }else{
+                                    const roomPriceNode = selectedRoom.querySelector('.selected-room-prize');
+                                    roomPriceNode.textContent = (Number(roomPriceNode.textContent)/currentNoOfRooms) * (currentNoOfRooms - 1);
+                                }
+                            }
+                        }
                     }
                 });
-            })
-            
+            })  
         }
     })
     .catch(err => console.error(err));
     
 }
+function buildTotalAmount (roomDetails) {
+    return`
+        <div>
+            <span>Total Amount</span>
+            <span id="totalamount></span>
+        </div>
+    `
+}
 
 function buildRoomRow(roomDetails) {
     roomDetails.selectedNoOfRooms = 0;
     return `
-        <div class="card">
+        <div class="card" data-room-id="${roomDetails._id}">
             <div class="card-header text-center fs-4 fw-semibold">${roomDetails.name}</div>
             <div class="card-body">
                 <div class="row">
@@ -154,42 +196,25 @@ function buildRoomRow(roomDetails) {
         </div>
     `
 }
-function ckeckroom(){
-    let totalroom = document.querySelector('.no-of-rooms').value;
-    if(totalroom>0){
-        
-    }
-}
-function selectroom(){
-    
-    return`<div class="card" style="width: 18rem;">
-    <h3>Selected Room</h3>
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item" id="first-room-image">
-        <div>
-            <img class="mw-100" src="" alt="room image"/>
-            <span class="selected-room-name">roomname</span>
-            <span class="selected-room-prize">roomprize</span>
+
+
+function buildSelectedRoom(roomDetails){
+    return`
+    <div class="row" id="room-${roomDetails._id}">
+        <div class="container">
+            <div class="card selected-room" >
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item " id="first-room-image">
+                        <div>
+                            <img class="mw-100 selected-room-image" src="${roomDetails.images[0]}" alt="room image"/>
+                            <span class="selected-room-name">${roomDetails.name}</span>
+                            <span class="selected-room-prize">${roomDetails.pricePerNight}</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
-        </li>
-        <li class="list-group-item" id="second-room-image">
-            <img class="mw-100" src="" alt="room image"/>
-            <span class="selected-room-name">roomname</span>
-            <span class="selected-room-prize">roomprize</span>
-        </li>
-        <li class="list-group-item" id="third-room-image">
-            <img class="mw-100" src="" alt="room image"/>
-            <span class="selected-room-name">roomname</span>
-            <span class="selected-room-prize">roomprize</span>
-        </li>
-    </ul>
-    <div class="card-footer">
-        <span class="total-amount">Total Amount</span>
-        <span class="total-Prize"></span>
     </div>
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <button class="btn btn-primary me-md-2" type="button" onclick="success()">Next</button>
-    </div>
-</div>`
+    `
 }
        
