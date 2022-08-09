@@ -154,7 +154,14 @@ function buildRoomRow(roomDetails) {
         </div>
     `
 }
+function ckeckroom(){
+    let totalroom = document.querySelector('.no-of-rooms').value;
+    if(totalroom>0){
+        
+    }
+}
 function selectroom(){
+    
     return`<div class="card" style="width: 18rem;">
     <h3>Selected Room</h3>
     <ul class="list-group list-group-flush">
