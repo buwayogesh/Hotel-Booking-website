@@ -11590,7 +11590,7 @@ input[type=radio] {
   }
 }
 .nav-bg-color {
-  background-color: #470540;
+  background-color: #410040;
 }
 
 .btn-signin {
@@ -11607,16 +11607,6 @@ input[type=radio] {
 }
 .hero-bg-container.hero-bg-container-navbar {
   height: calc(100vh - 116px);
-}
-
-.btn-book {
-  background-color: transparent;
-  color: #ec91f6;
-}
-
-.btn-book:hover {
-  color: white;
-  background-color: rgba(173, 21, 157, 0.54);
 }
 
 .btn-check-availability {

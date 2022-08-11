@@ -3,8 +3,8 @@
 * Copyright 2013-2022 Start Bootstrap
 * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-bare/blob/master/LICENSE)
 */
-document.querySelector('.btn.btn-book').addEventListener('click',function(e){
-    document.querySelector('.btn').remove();
+document.querySelector('.btn-book').addEventListener('click',function(e){
+    document.querySelector('.btn-book').remove();
     document.querySelector('.navbar').remove();
 //    var input=document.createElement('input');
 //    input.setAttribute('type','date');

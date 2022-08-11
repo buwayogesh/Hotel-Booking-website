@@ -1,4 +1,5 @@
 
+
 function availability() {
     const checkinDate = new Date(document.querySelector('.input-ckeck-in').value);
     const checkoutDate = new Date(document.querySelector('.input-ckeck-out').value);
@@ -9,6 +10,12 @@ function availability() {
     .then(response => response.json())
     .then(response => {
         if (response && response.status == 'ok') {
+            var selectedRoomDetail = {
+                "roomDetail" : [],
+                "totalAmmount" : 0,
+                "totalNoOfSelectedRoom" : 0
+            }
+            console.log(selectedRoomDetail);
             const roomDetailsContainer = document.createElement('div');
             roomDetailsContainer.id = 'roomdetails';
             roomDetailsContainer.className = 'row container roomdetails';
@@ -30,25 +37,63 @@ function availability() {
                         selectedRoomDetailsContainer = document.createElement('div');
                         selectedRoomDetailsContainer.className = 'selected-room-details-container';
                         heroContainer.appendChild(selectedRoomDetailsContainer);
+                        let TotalDetails = buildTotalAmount();
+                        const allDetails = document.createElement("div");
+                        allDetails.innerHTML = TotalDetails;
+                        heroContainer.appendChild(allDetails); 
                     }
                     const selectedRoomId = e.target.closest('.card')?.dataset?.roomId;
+                    const totalAmmountElement = heroContainer.querySelector('#totalamount');
+                    const totalRoomSelected = heroContainer.querySelector('#totalroom');
+                   
                    
                     if (e.target.dataset.id == 'plus') {
                         e.target.parentElement.querySelector('.no-of-rooms').textContent = currentNoOfRooms+1;
+                        // console.log(count);
                         if (selectedRoomId) {
                             const selectedRoom = selectedRoomDetailsContainer.querySelector(`#room-${selectedRoomId}`);
+                            let currentRoomPrice = 0;
                             if (selectedRoom) {
                                 const roomPriceNode = selectedRoom.querySelector('.selected-room-prize');
+                                currentRoomPrice = (Number(roomPriceNode.textContent)/currentNoOfRooms)
                                 roomPriceNode.textContent = (Number(roomPriceNode.textContent)/currentNoOfRooms) * (currentNoOfRooms+1);
-                                document.querySelector('#totalAmount').textContent = (Number(roomPriceNode.textContent)/currentNoOfRooms) * (currentNoOfRooms+1);
+                                numberofRoom = currentNoOfRooms+1;
+                                // selectedRoomDetail.roomDetail.numberofSelectedRoom = currentNoOfRooms+1;
+                                const roomObj = selectedRoomDetail.roomDetail.find(obj => obj._id == selectedRoomId);
+                                if (roomObj) {
+                                    roomObj.selectedNoOfRooms = currentNoOfRooms + 1;
+                                }
+                                totalRoomSelected.textContent = Number(totalRoomSelected.textContent) + ((currentNoOfRooms + 1)- currentNoOfRooms);
+                                selectedRoomDetail.totalNoOfSelectedRoom = currentNoOfRooms + 1
+                            
                             } else {
                                 const room = response.rooms.find((room) => room._id === selectedRoomId);
                                 let selectedRoomHTML = buildSelectedRoom(room);
-                                    // selectedRoomHTML += buildTotalAmount(room) 
                                 const el = document.createElement("div");
                                 el.innerHTML = selectedRoomHTML.trim();
                                 selectedRoomDetailsContainer.appendChild(el.firstChild);
+                                currentRoomPrice = room.pricePerNight;
+                                // numberofSelectedRoom = currentNoOfRooms+1
+                                selectedRoomDetail.roomDetail.push(Object.assign({}, {
+                                    capacityAdult: room.capacityAdult,
+                                    capacityChild: room.capacityChild,
+                                    customerRating: room.customerRating,
+                                    description: room.description,
+                                    discountPercentge: room.discountPercentge,
+                                    images: room.images,
+                                    name: room.name,
+                                    noOfAvaibleRoom: room.noOfAvaibleRoom,
+                                    noOfRooms: room.noOfRooms,
+                                    pricePerNight: room.pricePerNight,
+                                    _id: room._id
+                                }, {selectedNoOfRooms: currentNoOfRooms+1}));
+                                totalRoomSelected.textContent = Number(totalRoomSelected.textContent) + (currentNoOfRooms + 1);
                             }
+                            totalAmmountElement.textContent = Number(totalAmmountElement.textContent) + currentRoomPrice;
+                            let amount = totalAmmountElement.textContent;
+                            selectedRoomDetail.totalAmmount = amount;
+                            let totalroom = totalRoomSelected.textContent;
+                            selectedRoomDetail.totalNoOfSelectedRoom = totalroom;
                         }
                     } else {
                         e.target.parentElement.querySelector('.no-of-rooms').textContent = currentNoOfRooms-1;
@@ -56,26 +101,60 @@ function availability() {
                             const selectedRoom = selectedRoomDetailsContainer.querySelector(`#room-${selectedRoomId}`)
                             if (selectedRoom) {
                                 if(currentNoOfRooms == 1) {
+                                    const roomPriceNode = selectedRoom.querySelector('.selected-room-prize')
+                                    totalAmmountElement.textContent = Number(totalAmmountElement.textContent)-Number(roomPriceNode.textContent);
+                                    let amount = totalAmmountElement.textContent
+                                    let roomindex = selectedRoomDetail.roomDetail.findIndex(object => object._id == selectedRoomId)
+                                    selectedRoomDetail.roomDetail.splice(roomindex,1);
+                                    selectedRoomDetail.totalAmmount = amount;
+                                    totalRoomSelected.textContent = Number(totalRoomSelected.textContent)-1;
+                                    let totalroom = totalRoomSelected.textContent;
+                                    selectedRoomDetail.totalNoOfSelectedRoom = totalroom;
+                                
                                     selectedRoom.remove();
+                                    
                                 }else{
                                     const roomPriceNode = selectedRoom.querySelector('.selected-room-prize');
                                     roomPriceNode.textContent = (Number(roomPriceNode.textContent)/currentNoOfRooms) * (currentNoOfRooms - 1);
+                                    const currentRoomPrice = (Number(roomPriceNode.textContent)/(currentNoOfRooms - 1))
+                                    totalAmmountElement.textContent = Number(totalAmmountElement.textContent) - currentRoomPrice;
+                                    let amount = totalAmmountElement.textContent;
+                                    selectedRoomDetail.totalAmmount = amount;
+                                    const roomObj = selectedRoomDetail.roomDetail.find(obj => obj._id == selectedRoomId);
+                                    if (roomObj) {
+                                        roomObj.selectedNoOfRooms = currentNoOfRooms - 1;
+                                    }
+                                    totalRoomSelected.textContent = Number(totalRoomSelected.textContent)-((currentNoOfRooms) - (currentNoOfRooms-1));
+                                    let totalroom = totalRoomSelected.textContent;
+                                    selectedRoomDetail.totalNoOfSelectedRoom = totalroom;
                                 }
                             }
                         }
                     }
+
                 });
-            })  
+            }) 
+            
         }
+       
     })
     .catch(err => console.error(err));
     
 }
-function buildTotalAmount (roomDetails) {
+function buildTotalAmount () {
     return`
         <div>
-            <span>Total Amount</span>
-            <span id="totalamount></span>
+            <div>
+                <span>Total Amount</span>
+                <span id="totalamount"></span>
+            </div>
+            <div>
+                <span>Total Room Selected</span>
+                <span id="totalroom"></span>
+            </div>
+            <div>
+                <button type="submit" onclick="success(selectedRoomDetail)" id="btn-next">Next</button>
+            </div>
         </div>
     `
 }
@@ -216,5 +295,4 @@ function buildSelectedRoom(roomDetails){
         </div>
     </div>
     `
-}
-       
+}    
