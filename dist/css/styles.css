@@ -11612,7 +11612,6 @@ input[type=radio] {
 .btn-check-availability {
   background-color: green;
   color: white;
-  line-height: 35px;
 }
 
 .card-bg-color {

@@ -6,9 +6,7 @@
 document.querySelector('.btn-book').addEventListener('click',function(e){
     document.querySelector('.btn-book').remove();
     document.querySelector('.navbar').remove();
-//    var input=document.createElement('input');
-//    input.setAttribute('type','date');
-//    document.querySelector('.container1').appendChild(input);
+//    
       var html='';
       var container = document.querySelector('.hero-bg-container');
       if (container) {
