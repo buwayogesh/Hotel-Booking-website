@@ -1,48 +1,115 @@
-function success() {
-    
+function success(
+    rooms = {
+        roomDetails: [
+            {
+                images: [
+                    "https://q-xx.bstatic.com/xdata/images/hotel/840x460/375772951.jpg?k=7be3c76035b512717ff024bef7791ced523a38b812ca581029b2439a0cc4dfa2&o=",
+                    "https://pix8.agoda.net/hotelImages/108453/549932559/f3ac229590c469c342d69b2b61006132.jpg?ce=0&s=1024x768",
+                    "https://pix8.agoda.net/hotelImages/108453/549932559/5226cd7d93676e1b6e1ef7e395548429.jpg?ce=0&s=1024x768",
+                    "https://pix8.agoda.net/hotelImages/108453/549932559/0971ab1b5d67c29489b7151956bbaad2.jpg?ce=0&s=1024x768",
+                    "https://pix8.agoda.net/hotelImages/108453/549932559/5788b183ce15c740959d2a9af894269f.jpg?ce=0&s=1024x768",
+                    "https://q-xx.bstatic.com/xdata/images/hotel/840x460/375772031.jpg?k=954b2bb5975a498173fce8a06176078e09c35aa7e112f4c9c07cc769177379bc&o=",
+                    "https://q-xx.bstatic.com/xdata/images/hotel/840x460/375772028.jpg?k=eda45f324d0aba77b9ef83eb68cb4a878563f1440b9a59afe82963665f6db02e&o=",
+                    "https://q-xx.bstatic.com/xdata/images/hotel/840x460/375772027.jpg?k=89786e157fcb6b8f4605d096a288a5ee47cfa64fe45f469b5f6dd49fe709fd3f&o=",
+                    "https://q-xx.bstatic.com/xdata/images/hotel/840x460/375772032.jpg?k=9dc27ceb3d6c9cd217bae90b22a26f7b5e2da5c5ae88f68f9fefc768fd866063&o=",
+                    "https://q-xx.bstatic.com/xdata/images/hotel/840x460/375772951.jpg?k=7be3c76035b512717ff024bef7791ced523a38b812ca581029b2439a0cc4dfa2&o=",
+                    "https://pix8.agoda.net/hotelImages/108453/549932559/f3ac229590c469c342d69b2b61006132.jpg?ce=0&s=1024x768",
+                ],
+                _id: "62e8d30e7fb53d2a28e7c33c",
+                name: "Standard Room",
+                description:
+                    "Bed Room for couples with balcony having sea view",
+                capacityAdult: 2,
+                capacityChild: 0,
+                noOfRooms: 15,
+                pricePerNight: 7400,
+                discountPercentge: 5,
+                customerRating: 8,
+                createdAt: "2022-08-02T07:32:30.082Z",
+                updatedAt: "2022-08-02T07:32:30.082Z",
+                noOfAvaibleRoom: 15,
+                selectedNoOfRooms: 1,
+            },
+            {
+                images: [
+                    "https://q-xx.bstatic.com/xdata/images/hotel/840x460/375772951.jpg?k=7be3c76035b512717ff024bef7791ced523a38b812ca581029b2439a0cc4dfa2&o=",
+                    "https://pix8.agoda.net/hotelImages/108453/549932559/f3ac229590c469c342d69b2b61006132.jpg?ce=0&s=1024x768",
+                    "https://pix8.agoda.net/hotelImages/108453/549932559/5226cd7d93676e1b6e1ef7e395548429.jpg?ce=0&s=1024x768",
+                    "https://pix8.agoda.net/hotelImages/108453/549932559/0971ab1b5d67c29489b7151956bbaad2.jpg?ce=0&s=1024x768",
+                    "https://pix8.agoda.net/hotelImages/108453/549932559/5788b183ce15c740959d2a9af894269f.jpg?ce=0&s=1024x768",
+                    "https://q-xx.bstatic.com/xdata/images/hotel/840x460/375772031.jpg?k=954b2bb5975a498173fce8a06176078e09c35aa7e112f4c9c07cc769177379bc&o=",
+                    "https://q-xx.bstatic.com/xdata/images/hotel/840x460/375772028.jpg?k=eda45f324d0aba77b9ef83eb68cb4a878563f1440b9a59afe82963665f6db02e&o=",
+                    "https://q-xx.bstatic.com/xdata/images/hotel/840x460/375772027.jpg?k=89786e157fcb6b8f4605d096a288a5ee47cfa64fe45f469b5f6dd49fe709fd3f&o=",
+                    "https://q-xx.bstatic.com/xdata/images/hotel/840x460/375772032.jpg?k=9dc27ceb3d6c9cd217bae90b22a26f7b5e2da5c5ae88f68f9fefc768fd866063&o=",
+                    "https://q-xx.bstatic.com/xdata/images/hotel/840x460/375772951.jpg?k=7be3c76035b512717ff024bef7791ced523a38b812ca581029b2439a0cc4dfa2&o=",
+                    "https://pix8.agoda.net/hotelImages/108453/549932559/f3ac229590c469c342d69b2b61006132.jpg?ce=0&s=1024x768",
+                ],
+                _id: "62e8d30e7fb53d2a28e7c33c",
+                name: "Standard Room",
+                description:
+                    "Bed Room for couples with balcony having sea view",
+                capacityAdult: 2,
+                capacityChild: 0,
+                noOfRooms: 15,
+                pricePerNight: 7400,
+                discountPercentge: 5,
+                customerRating: 8,
+                createdAt: "2022-08-02T07:32:30.082Z",
+                updatedAt: "2022-08-02T07:32:30.082Z",
+                noOfAvaibleRoom: 15,
+                selectedNoOfRooms: 1,
+            },
+        ],
+        totalAmmount: 10000,
+        totalNoOfSelectedRooms: 3,
+    }
+) {
+    document.querySelector(".roomdetails").remove();
+    document.querySelector(".selected-room-details-container").remove();
+    document.querySelector("#buildAmount").remove();
 
-
-    document.querySelector('#roomdetails').remove();
-    var html = ''
-    var paymentcard = document.createElement('div');
+    var paymentcard = document.createElement("div");
     paymentcard.id = "payment";
     paymentcard.className = "payment";
-    
+    let html = "";
+    rooms.roomDetails.forEach((roomdetails) => {
+        html += buildSelectedRoomCard(roomdetails, rooms.roomDetails.length);
+    });
     html += paymentcarddet();
     paymentcard.innerHTML = html;
-    document.querySelector('.container-fluid').appendChild(paymentcard);
-     
-    // document.querySelector('.next').addEventListener('click',function(e){
-    //  document.querySelector('.payment-card').remove();
-    //  var html='';
-    //  var selectRoomCard=document.createElement('div');
-    //  selectRoomCard.id="selectroomcard";
-    //  selectRoomCard.className="selectroomcard";
-    //  html += cardchange();
-    //  selectRoomCard.innerHTML=html;
-    //  document.querySelector('.selectroomcard-container').appendChild(selectRoomCard);
-       // })
-
-       
+    document.querySelector(".container-fluid").appendChild(paymentcard);
+}
+function buildSelectedRoomCard(roomdetails, noOfRooms) {
+    return `<div class="card card-change">
+    <div class="row g-0">
+    <div class="${noOfRooms < 2 ? "col-12" : "col-4"}">
+      <img src="${
+          roomdetails.images[0]
+      }" class="img-fluid rounded-start w-100 h-100" alt="...">
+    </div>  
+      <div class="${noOfRooms < 2 ? "col-12" : "col-8"}">
+        <div class="card-body">
+          <h5 class="card-title">${roomdetails.name}</h5>
+          <p class="card-text">Selected No. of Room:${
+              roomdetails.selectedNoOfRooms
+          }</p>
+          <p class="card-text">Price:${roomdetails.pricePerNight}</p>
+        </div>
+      </div>
+  </div>`;
 }
 function paymentcarddet() {
-    return`<div class="container d-lg-flex">
+   
+
+    return `<div class="container d-lg-flex">
     
     <div class="box-1 bg-light user">
-    <h5>Total Price</h5>
+    <h5></h5>
         <div class="box-inner-1 selectroomcard-container">
         
-        
-        <div class="card payment-card w-100 h-50">
-  <img src="./assets/hotelimg1.jpg" class="card-img-top" alt="...">
-  <div class="card-body">
-  <h5 class="card-title">Selected Room Name</h5>
-  <p>Selected Room</p>
-  <p>Price</p>
+  
   </div>
-</div><br/>
-<button class='next'>Next</button>
-      </div>      
+    </div>      
     </div>
     <div class="box-2">
         <div class="box-inner-2">
@@ -110,23 +177,5 @@ function paymentcarddet() {
             </form>
         </div>
     </div>
-</div>`
-    
-    
-}
-function cardchange(){
-    return `<div class="card card-change mb-3">
-    <div class="row g-0">
-      <div class="col-md-4">
-        <img src="./assets/hotelimg1.jpg" class="img-fluid rounded-start w-100 h-100" alt="...">
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title">Selected Room Name</h5>
-          <p class="card-text">Selected Room</p>
-          <p class="card-text">Price</p>
-        </div>
-      </div>
-    </div>
-  </div>`
+</div>`;
 }
