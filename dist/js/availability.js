@@ -1,5 +1,3 @@
-
-
 function availability() {
     const checkinDate = new Date(
         document.querySelector(".input-ckeck-in").value
@@ -160,7 +158,7 @@ function buildTotalAmount () {
                 <button type="submit" onclick="success(selectedRoomDetail)" id="btn-next">Next</button>
             </div>
         </div>
-    `
+    `;
 }
 
 function buildRoomRow(roomDetails) {
@@ -329,5 +327,5 @@ function buildSelectedRoom(roomDetails) {
             </div>
         </div>
     </div>
-    `
-}    
+    `;
+}

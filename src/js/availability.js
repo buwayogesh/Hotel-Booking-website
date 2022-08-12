@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-=======
-
-
->>>>>>> db8e8d0c7f1a92e6093c4a4f9b33dceff0d3aa61
 function availability() {
     const checkinDate = new Date(
         document.querySelector(".input-ckeck-in").value
@@ -13,141 +8,6 @@ function availability() {
     document.querySelector("#check-availability").remove();
     document.querySelector(".container-fluid").style.backgroundImage = "none";
     console.log(checkinDate, checkoutDate);
-<<<<<<< HEAD
-
-    fetch(
-        `http://localhost:9000/hotel/v1/rooms/check-availability/?checkoutDate=${checkoutDate.toISOString()}&checkinDate=${checkinDate.toISOString()}`,
-        {
-            method: "GET",
-        }
-    )
-        .then((response) => response.json())
-        .then((response) => {
-            if (response && response.status == "ok") {
-                const roomDetailsContainer = document.createElement("div");
-                roomDetailsContainer.id = "roomdetails";
-                roomDetailsContainer.className = "row container roomdetails";
-                let html = "";
-                response.rooms.forEach((room) => {
-                    html += buildRoomRow(room);
-                });
-                roomDetailsContainer.innerHTML = html;
-                const heroContainer =
-                    document.querySelector(".hero-bg-container");
-                heroContainer.appendChild(roomDetailsContainer);
-
-                roomDetailsContainer
-                    .querySelectorAll(".room-selector")
-                    .forEach((node) => {
-                        node.addEventListener("click", (e) => {
-                            e.stopPropagation();
-                            let currentNoOfRooms = Number(
-                                e.target.parentElement.querySelector(
-                                    ".no-of-rooms"
-                                ).textContent
-                            );
-                            // TODO check there is div for adding or updating final room selection
-                            let selectedRoomDetailsContainer =
-                                heroContainer.querySelector(
-                                    ".selected-room-details-container"
-                                );
-                            if (!selectedRoomDetailsContainer) {
-                                selectedRoomDetailsContainer =
-                                    document.createElement("div");
-                                selectedRoomDetailsContainer.className =
-                                    "selected-room-details-container";
-                                heroContainer.appendChild(
-                                    selectedRoomDetailsContainer
-                                );
-                                let TotalDetails = buildTotalAmount();
-                                const allDetails =
-                                    document.createElement("div");
-                                allDetails.innerHTML = TotalDetails;
-                                heroContainer.appendChild(allDetails);
-                            }
-                            const selectedRoomId =
-                                e.target.closest(".card")?.dataset?.roomId;
-
-                            if (e.target.dataset.id == "plus") {
-                                e.target.parentElement.querySelector(
-                                    ".no-of-rooms"
-                                ).textContent = currentNoOfRooms + 1;
-                                if (selectedRoomId) {
-                                    const selectedRoom =
-                                        selectedRoomDetailsContainer.querySelector(
-                                            `#room-${selectedRoomId}`
-                                        );
-                                    if (selectedRoom) {
-                                        const roomPriceNode =
-                                            selectedRoom.querySelector(
-                                                ".selected-room-prize"
-                                            );
-                                        roomPriceNode.textContent =
-                                            (Number(roomPriceNode.textContent) /
-                                                currentNoOfRooms) *
-                                            (currentNoOfRooms + 1);
-                                        document.querySelector(
-                                            "#totalAmount"
-                                        ).textContent =
-                                            (Number(roomPriceNode.textContent) /
-                                                currentNoOfRooms) *
-                                            (currentNoOfRooms + 1);
-                                    } else {
-                                        const room = response.rooms.find(
-                                            (room) =>
-                                                room._id === selectedRoomId
-                                        );
-                                        let selectedRoomHTML =
-                                            buildSelectedRoom(room);
-                                        selectedRoomHTML +=
-                                            buildTotalAmount(room);
-                                        const el =
-                                            document.createElement("div");
-                                        el.innerHTML = selectedRoomHTML.trim();
-                                        selectedRoomDetailsContainer.appendChild(
-                                            el.firstChild
-                                        );
-                                    }
-                                }
-                            } else {
-                                e.target.parentElement.querySelector(
-                                    ".no-of-rooms"
-                                ).textContent = currentNoOfRooms - 1;
-                                if (selectedRoomId) {
-                                    const selectedRoom =
-                                        selectedRoomDetailsContainer.querySelector(
-                                            `#room-${selectedRoomId}`
-                                        );
-                                    if (selectedRoom) {
-                                        if (currentNoOfRooms == 1) {
-                                            selectedRoom.remove();
-                                        } else {
-                                            const roomPriceNode =
-                                                selectedRoom.querySelector(
-                                                    ".selected-room-prize"
-                                                );
-                                            roomPriceNode.textContent =
-                                                (Number(
-                                                    roomPriceNode.textContent
-                                                ) /
-                                                    currentNoOfRooms) *
-                                                (currentNoOfRooms - 1);
-                                        }
-                                    }
-                                }
-                            }
-                        });
-                    });
-            }
-        })
-        .catch((err) => console.error(err));
-}
-function buildTotalAmount() {
-    return `
-        <div id="buildAmount">
-            <span>Total Amount</span>
-            <span id="totalamount></span>
-=======
     fetch(`http://localhost:9000/hotel/v1/rooms/check-availability/?checkoutDate=${checkoutDate.toISOString()}&checkinDate=${checkinDate.toISOString()}`, {method: 'GET'})
     .then(response => response.json())
     .then(response => {
@@ -297,10 +157,6 @@ function buildTotalAmount () {
             <div>
                 <button type="submit" onclick="success(selectedRoomDetail)" id="btn-next">Next</button>
             </div>
->>>>>>> db8e8d0c7f1a92e6093c4a4f9b33dceff0d3aa61
-        </div>
-        <div>
-        <button type="button" class="btn btn-primary" onclick="success()">Next</button>
         </div>
     `;
 }
@@ -471,10 +327,5 @@ function buildSelectedRoom(roomDetails) {
             </div>
         </div>
     </div>
-<<<<<<< HEAD
     `;
 }
-=======
-    `
-}    
->>>>>>> db8e8d0c7f1a92e6093c4a4f9b33dceff0d3aa61
