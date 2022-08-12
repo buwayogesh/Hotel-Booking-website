@@ -12,7 +12,7 @@ function availability() {
     .then(response => response.json())
     .then(response => {
         if (response && response.status == 'ok') {
-            var selectedRoomDetail = {
+            window.selectedRoomDetail = {
                 "roomDetail" : [],
                 "totalAmmount" : 0,
                 "totalNoOfSelectedRoom" : 0
@@ -43,6 +43,7 @@ function availability() {
                         const allDetails = document.createElement("div");
                         allDetails.innerHTML = TotalDetails;
                         heroContainer.appendChild(allDetails); 
+                       
                     }
                     const selectedRoomId = e.target.closest('.card')?.dataset?.roomId;
                     const totalAmmountElement = heroContainer.querySelector('#totalamount');
@@ -143,9 +144,9 @@ function availability() {
     .catch(err => console.error(err));
     
 }
-function buildTotalAmount () {
+function buildTotalAmount() {
     return`
-        <div>
+        <div id="buildAmount">
             <div>
                 <span>Total Amount</span>
                 <span id="totalamount"></span>
