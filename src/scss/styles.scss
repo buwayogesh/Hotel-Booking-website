@@ -6,7 +6,7 @@
 // Insert any custom SCSS here!
 
 .nav-bg-color{
-    background-color: rgb(71, 5, 64);
+    background-color: #410040;
 }
 .btn-signin{
     background-color: rgb(173 21 157 / 54%);
@@ -25,19 +25,6 @@
     height: calc(100vh - 116px);
   }
 }
-
-
-.btn-book{
-    background-color: transparent;
-    color: rgb(236 145 246);
-  
-}
-.btn-book:hover{
-    color: white;
-    background-color: rgb(173 21 157 / 54%);
-  
-}
-
 .btn-check-availability{
    background-color: green;
    color: white;
