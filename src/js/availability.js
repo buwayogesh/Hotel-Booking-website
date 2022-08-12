@@ -20,11 +20,12 @@ function availability() {
             console.log(selectedRoomDetail);
             const roomDetailsContainer = document.createElement('div');
             roomDetailsContainer.id = 'roomdetails';
-            roomDetailsContainer.className = 'row container roomdetails';
-            let html = '';
+            roomDetailsContainer.className = 'row';
+            let html = '<div class="col-12">';
             response.rooms.forEach(room => {
                 html += buildRoomRow(room);
             });
+            html += '</div>';
             roomDetailsContainer.innerHTML = html;
             const heroContainer = document.querySelector('.hero-bg-container')
             heroContainer.appendChild(roomDetailsContainer);
@@ -91,6 +92,8 @@ function availability() {
                                     _id: room._id
                                 }, {selectedNoOfRooms: currentNoOfRooms+1}));
                                 totalRoomSelected.textContent = Number(totalRoomSelected.textContent) + (currentNoOfRooms + 1);
+                                // const imageArray = room.images;
+
                             }
                             totalAmmountElement.textContent = Number(totalAmmountElement.textContent) + currentRoomPrice;
                             let amount = totalAmmountElement.textContent;
@@ -146,29 +149,29 @@ function availability() {
 }
 function buildTotalAmount() {
     return`
-        <div id="buildAmount">
+    <div class="card w-25">
+        <div class="card-body" id="buildAmount">
             <div>
                 <span>Total Amount</span>
                 <span id="totalamount"></span>
             </div>
             <div>
-                <span>Total Room Selected</span>
+                <span>Total Room</span>
                 <span id="totalroom"></span>
             </div>
-            <div>
-                <button type="submit" onclick="success(selectedRoomDetail)" id="btn-next">Next</button>
-            </div>
+            <button type="submit" class="btn btn-primary" id="btn-next" onclick="success(selectedRoomDetail)">Next</button>
         </div>
-    `;
+    </div>  
+    `
 }
 
 function buildRoomRow(roomDetails) {
     roomDetails.selectedNoOfRooms = 0;
     return `
-        <div class="card roomrow" data-room-id="${roomDetails._id}">
-            <div class="card-header text-center fs-4 fw-semibold">${
-                roomDetails.name
-            }</div>
+    <div class="row">
+  <div class="col-12">
+        <div class="card" data-room-id="${roomDetails._id}">
+            <div class="card-header text-center fs-4 fw-semibold">${roomDetails.name}</div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-3">
@@ -177,51 +180,7 @@ function buildRoomRow(roomDetails) {
                         }" alt="room image" /></div>
                         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-inner">
-                          <div class="carousel-item active">
-                            <img src="${
-                                roomDetails.images[1]
-                            }" class="d-block w-100" alt="room image">
-                          </div>
-                          <div class="carousel-item">
-                            <img src="${
-                                roomDetails.images[2]
-                            }" class="d-block w-100" alt="room image">
-                          </div>
-                          <div class="carousel-item">
-                            <img src="${
-                                roomDetails.images[3]
-                            }" class="d-block w-100" alt="room image">
-                          </div>
-                          <div class="carousel-item">
-                            <img src="${
-                                roomDetails.images[4]
-                            }" class="d-block w-100" alt="room image">
-                          </div>
-                          <div class="carousel-item">
-                            <img src="${
-                                roomDetails.images[5]
-                            }" class="d-block w-100" alt="room image">
-                          </div>
-                          <div class="carousel-item">
-                            <img src="${
-                                roomDetails.images[6]
-                            }" class="d-block w-100" alt="room image">
-                          </div>
-                          <div class="carousel-item">
-                            <img src="${
-                                roomDetails.images[7]
-                            }" class="d-block w-100" alt="room image">
-                          </div>
-                          <div class="carousel-item">
-                            <img src="${
-                                roomDetails.images[8]
-                            }" class="d-block w-100" alt="room image">
-                          </div>
-                          <div class="carousel-item">
-                            <img src="${
-                                roomDetails.images[9]
-                            }" class="d-block w-100" alt="room image">
-                          </div>
+                          
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
                           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -305,15 +264,34 @@ function buildRoomRow(roomDetails) {
                     <span class="no-of-rooms">0</span>
                     <button class="room-selector" data-id="plus">+</button>
                 </div>
-                    
+            
             </div>
         </div>
-    `;
+        </div>
+        </div>
+    `
 }
 
-function buildSelectedRoom(roomDetails) {
-    return `
-    <div class="row" id="room-${roomDetails._id}">
+
+function buildSelectedRoom(roomDetails){
+    return`
+    <div class="card mb-3" id="room-${roomDetails._id}" style="max-width: 540px;">
+        <div class="row g-0 selected-room">
+            <div class="col-md-4">
+                <img src="${roomDetails.images[0]}" class="img-fluid rounded-start selected-room-image" alt="room image">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title selected-room-name">${roomDetails.name}</h5>
+                    <span class="selected-room-prize">${roomDetails.pricePerNight}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    `
+}    
+
+{/* <div class="row" id="room-${roomDetails._id}">
         <div class="container">
             <div class="card selected-room" >
                 <ul class="list-group list-group-flush">
@@ -327,6 +305,4 @@ function buildSelectedRoom(roomDetails) {
                 </ul>
             </div>
         </div>
-    </div>
-    `;
-}
+    </div> */}
