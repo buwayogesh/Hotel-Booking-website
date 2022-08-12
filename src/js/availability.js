@@ -1,10 +1,12 @@
-
-
 function availability() {
-    const checkinDate = new Date(document.querySelector('.input-ckeck-in').value);
-    const checkoutDate = new Date(document.querySelector('.input-ckeck-out').value);
-    document.querySelector('#check-availability').remove();
-    document.querySelector('.container-fluid').style.backgroundImage = 'none';
+    const checkinDate = new Date(
+        document.querySelector(".input-ckeck-in").value
+    );
+    const checkoutDate = new Date(
+        document.querySelector(".input-ckeck-out").value
+    );
+    document.querySelector("#check-availability").remove();
+    document.querySelector(".container-fluid").style.backgroundImage = "none";
     console.log(checkinDate, checkoutDate);
     fetch(`http://localhost:9000/hotel/v1/rooms/check-availability/?checkoutDate=${checkoutDate.toISOString()}&checkinDate=${checkinDate.toISOString()}`, {method: 'GET'})
     .then(response => response.json())
@@ -172,7 +174,9 @@ function buildRoomRow(roomDetails) {
             <div class="card-body">
                 <div class="row">
                     <div class="col-3">
-                        <div class="mw-100 image-container"><img class="mw-100" src="${roomDetails.images[0]}" alt="room image" /></div>
+                        <div class="mw-100 image-container"><img class="mw-100" src="${
+                            roomDetails.images[0]
+                        }" alt="room image" /></div>
                         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-inner">
                           
@@ -189,60 +193,70 @@ function buildRoomRow(roomDetails) {
                     </div>
                     <div class="col-2">
                         <h5 class="card-tittle">Features</h5>
-                        ${
-                            (function() {
-                                let html = '<ul>';
-                                roomDetails.features.forEach(feature =>
-                                    html += '<li class="card-text">' + feature +'</li>'
-                                )
-                                html += '</ul>'
-                                return html;
-                            })()
-                        }
+                        ${(function () {
+                            let html = "<ul>";
+                            roomDetails.features.forEach(
+                                (feature) =>
+                                    (html +=
+                                        '<li class="card-text">' +
+                                        feature +
+                                        "</li>")
+                            );
+                            html += "</ul>";
+                            return html;
+                        })()}
                     </div>
                     <div class="col-2">
                         <h5 class="card-tittle">Bath and Toilet Accessories</h5>
-                        ${
-                            (function() {
-                                let html = '<ul>';
-                                roomDetails.bathroomAccessories.forEach(feature =>
-                                    html += '<li class="card-text">' + feature +'</li>'
-                                )
-                                html += '</ul>'
-                                return html;
-                            })()
-                        }
+                        ${(function () {
+                            let html = "<ul>";
+                            roomDetails.bathroomAccessories.forEach(
+                                (feature) =>
+                                    (html +=
+                                        '<li class="card-text">' +
+                                        feature +
+                                        "</li>")
+                            );
+                            html += "</ul>";
+                            return html;
+                        })()}
                     </div>
                     <div class="col-2">
                         <h5 class="card-tittle">Entertainment</h5>
-                        ${
-                            (function() {
-                                let html = '<ul>';
-                                roomDetails.entertainment.forEach(feature =>
-                                    html += '<li class="card-text">' + feature +'</li>'
-                                )
-                                html += '</ul>'
-                                return html;
-                            })()
-                        }
+                        ${(function () {
+                            let html = "<ul>";
+                            roomDetails.entertainment.forEach(
+                                (feature) =>
+                                    (html +=
+                                        '<li class="card-text">' +
+                                        feature +
+                                        "</li>")
+                            );
+                            html += "</ul>";
+                            return html;
+                        })()}
                     </div>
                     <div class="col-3">
                         <h5 class="card-tittle">Other</h5>
-                        ${
-                            (function() {
-                                let html = '<ul>';
-                                roomDetails.comforts.forEach(feature =>
-                                    html += '<li class="card-text">' + feature +'</li>'
-                                )
-                                html += '</ul>'
-                                return html;
-                            })()
-                        }
+                        ${(function () {
+                            let html = "<ul>";
+                            roomDetails.comforts.forEach(
+                                (feature) =>
+                                    (html +=
+                                        '<li class="card-text">' +
+                                        feature +
+                                        "</li>")
+                            );
+                            html += "</ul>";
+                            return html;
+                        })()}
                     </div>
                 </div>
             </div>
             <div class="card-footer d-flex flex-row justify-content-around">
-                <span class="float-right">Price per night ${roomDetails.pricePerNight}
+                <span class="float-right">Price per night ${
+                    roomDetails.pricePerNight
+                }
                 </span>
                 <div>
                     <button class="room-selector" data-id="minus">−</button>

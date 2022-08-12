@@ -43,7 +43,5 @@ document.querySelector('.btn-book').addEventListener('click',function(e){
 })
 
 function setoutdate(){
-  let checkin = document.querySelector('#checkindate').value;
-  document.querySelector('#checkoutdate').setAttribute("min",checkin);
+  document.querySelector('#checkoutdate').setAttribute("min",document.querySelector('#checkindate').value)
 }
-
