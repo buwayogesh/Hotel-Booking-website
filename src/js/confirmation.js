@@ -6,42 +6,43 @@ function success(selectedRoomDetail) {
 
     var paymentcard = document.createElement("div");
     paymentcard.id = "payment";
-    paymentcard.className = "payment card w-50 d-flex justify-content-between";
-    let html = "";
+    paymentcard.className = "payment container d-flex flex-row col-md-12";
+    let html = "<div>";
     selectedRoomDetail.roomDetail.forEach((roomdetails) => {
         html += buildSelectedRoomCard(roomdetails, selectedRoomDetail.roomDetail.length);
     });
-    html += paymentcarddet();
+    html += "</div>" + paymentcarddet();
     paymentcard.innerHTML = html;
     document.querySelector(".container-fluid").appendChild(paymentcard); 
     
 }
 function buildSelectedRoomCard(roomdetails, noOfRooms) {
     return `
-    <div class="card card-change w-50">
-    <div class="row g-0">
-    <div class="${noOfRooms < 2 ? "col-12" : "col-4"}">
-      <img src="${
-          roomdetails.images[0]
-      }" class="img-fluid rounded-start w-100 h-100" alt="...">
-    </div>  
-      <div class="${noOfRooms < 2 ? "col-12" : "col-8"}">
-        <div class="card-body">
-          <h5 class="card-title">${roomdetails.name}</h5>
-          <p class="card-text">Selected No. of Room:${
-              roomdetails.selectedNoOfRooms
-          }</p>
-          <p class="card-text">Price:${roomdetails.pricePerNight}</p>
+    
+    <div class="card card-change col-md-12 mt-2">
+        <div class="row g-0">
+            <div class="${noOfRooms < 2 ? "col-12" : "col-4"}">
+            <img src="${
+            roomdetails.images[0]
+            }" class="img-fluid rounded-start w-100 h-100" alt="...">
+            </div>  
+            <div class="${noOfRooms < 2 ? "col-12" : "col-8"}">
+                <div class="card-body">
+                    <h5 class="card-title">${roomdetails.name}</h5>
+                    <p class="card-text">Selected No. of Room:${
+                        roomdetails.selectedNoOfRooms
+                    }</p>
+                <p class="card-text">Price:${roomdetails.pricePerNight}</p>
+                </div>
+            </div>
         </div>
-      </div>
-  </div>
-  </div>
+    </div>
   `;
 }
 function paymentcarddet() {
    
 
-    return `<div class="box-2 card w-50">
+    return `<div class="box-2 card col-md-12">
         <div class="box-inner-2">
             <div>
                 <p class="fw-bold">Payment Details</p>
@@ -93,14 +94,18 @@ function paymentcarddet() {
                                 <p class="fw-bold">Total Room Selected</p>
                                 <p class="fw-bold">${selectedRoomDetail.totalNoOfSelectedRoom}</p>
                             </div>
-                        
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <p class="fw-bold">Number of Days</p>
+                                <p class="fw-bold">${selectedRoomDetail.NumberOfDays}</p>
+                            </div>
                             <div class="d-flex align-items-center justify-content-between mb-2">
                                 <p class="fw-bold">Total</p>
-                                <p class="fw-bold">${selectedRoomDetail.totalAmmount}</p>
+                                <p class="fw-bold"> ${Number(selectedRoomDetail.totalAmmount) * Number(selectedRoomDetail.NumberOfDays)}</p>
                             </div>
                             <div class="btn btn-primary mt-2 pay" onclick="validation()">Pay</div>
                         </div>
-            
+
+
                 </div>
             </form>
         </div>
@@ -222,6 +227,7 @@ function validation(){
 function rmvemlerror(){
     document.querySelector('.email-error').innerHTML="";
 }
+
 function removecarderror(){
     document.querySelector('.card-error').innerHTML="";
 }

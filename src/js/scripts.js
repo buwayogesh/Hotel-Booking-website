@@ -22,7 +22,7 @@ document.querySelector('.btn-book').addEventListener('click',function(e){
         html += '</li>'
         html += '<li class="list-group-item d-flex justify-content-evenly">'
         html += '<span>Check Out :</span>'
-        html += '<input type="date" class="input-ckeck-out" id="checkoutdate">'
+        html += '<input type="date" class="input-ckeck-out" id="checkoutdate" onchange="setindate()">'
         html += '</li>'
         html += '</ul>'
         html += '<div class="card-footer d-flex justify-content-center">'
@@ -34,9 +34,14 @@ document.querySelector('.btn-book').addEventListener('click',function(e){
         container.appendChild(form);
         var today = new Date();
         document.querySelector('#checkindate').setAttribute("min",today.toISOString().substring(0, 10));
+        document.querySelector('#checkoutdate').setAttribute("min",today.toISOString().substring(0, 10));
       }
 })
 
 function setoutdate(){
   document.querySelector('#checkoutdate').setAttribute("min",document.querySelector('#checkindate').value)
+  
+}
+function setindate(){
+  document.querySelector('#checkindate').setAttribute("max",document.querySelector('#checkoutdate').value)
 }

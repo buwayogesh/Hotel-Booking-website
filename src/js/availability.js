@@ -2,10 +2,12 @@ function availability() {
     const checkinDate = new Date(
         document.querySelector(".input-ckeck-in").value
     );
+    
     const checkoutDate = new Date(
         document.querySelector(".input-ckeck-out").value
     );
-    var noOfDays=(checkoutDate-checkinDate)/(1000*3600*24);
+    
+    var numberOfDays = (checkoutDate-checkinDate)/(1000*3600*24);
     document.querySelector("#check-availability").remove();
     document.querySelector(".container-fluid").style.backgroundImage = "none";
     console.log(checkinDate, checkoutDate);
@@ -17,17 +19,17 @@ function availability() {
                 "roomDetail" : [],
                 "totalAmmount" : 0,
                 "totalNoOfSelectedRoom" : 0,
-                "NumberOfDays":0,
-                "CheckInDate":0,
-                "CheckOutDate":0
+                "NumberOfDays" : 0,
+                "CheckInDate" : 0,
+                "CheckOutDate" : 0
             }
             console.log(selectedRoomDetail);
             const roomDetailsContainer = document.createElement('div');
             roomDetailsContainer.id = 'roomdetails';
             roomDetailsContainer.className = 'row';
             let html = '<div class="col-12">';
-            response.rooms.forEach(room => {
-                html += buildRoomRow(room);
+            response.rooms.forEach((room, index) => {
+                html += buildRoomRow(room, index);
             });
             html += '</div>';
             roomDetailsContainer.innerHTML = html;
@@ -53,12 +55,12 @@ function availability() {
                     const selectedRoomId = e.target.closest('.card')?.dataset?.roomId;
                     const totalAmmountElement = heroContainer.querySelector('#totalamount');
                     const totalRoomSelected = heroContainer.querySelector('#totalroom');
-                    const totaldays=noOfDays;
-                    selectedRoomDetail.NumberOfDays=totaldays;
-                    let check_in=checkinDate;
-                    selectedRoomDetail.CheckInDate=check_in;
-                    let check_out=checkoutDate;
-                    selectedRoomDetail.CheckOutDate=check_out;
+                    const totaldays = numberOfDays;
+                    selectedRoomDetail.NumberOfDays = totaldays;
+                    let check_in = checkinDate;
+                    selectedRoomDetail.CheckInDate = check_in;
+                    let check_out = checkoutDate;
+                    selectedRoomDetail.CheckOutDate = check_out;
                    
                    
                     if (e.target.dataset.id == 'plus') {
@@ -82,12 +84,13 @@ function availability() {
                             
                             } else {
                                 const room = response.rooms.find((room) => room._id === selectedRoomId);
+                                
+
                                 let selectedRoomHTML = buildSelectedRoom(room);
                                 const el = document.createElement("div");
                                 el.innerHTML = selectedRoomHTML.trim();
                                 selectedRoomDetailsContainer.appendChild(el.firstChild);
                                 currentRoomPrice = room.pricePerNight;
-                                // numberofSelectedRoom = currentNoOfRooms+1
                                 selectedRoomDetail.roomDetail.push(Object.assign({}, {
                                     capacityAdult: room.capacityAdult,
                                     capacityChild: room.capacityChild,
@@ -102,7 +105,6 @@ function availability() {
                                     _id: room._id
                                 }, {selectedNoOfRooms: currentNoOfRooms+1}));
                                 totalRoomSelected.textContent = Number(totalRoomSelected.textContent) + (currentNoOfRooms + 1);
-                                // const imageArray = room.images;
 
                             }
                             totalAmmountElement.textContent = Number(totalAmmountElement.textContent) + currentRoomPrice;
@@ -113,6 +115,9 @@ function availability() {
                         }
                     } else {
                         e.target.parentElement.querySelector('.no-of-rooms').textContent = currentNoOfRooms-1;
+                        if(currentNoOfRooms <= 0){
+                            e.target.parentElement.querySelector('.no-of-rooms').textContent = 0
+                        };
                         if (selectedRoomId) {
                             const selectedRoom = selectedRoomDetailsContainer.querySelector(`#room-${selectedRoomId}`)
                             if (selectedRoom) {
@@ -175,35 +180,41 @@ function buildTotalAmount() {
     `
 }
 
-function buildRoomRow(roomDetails) {
+function buildRoomRow(roomDetails, index) {
     roomDetails.selectedNoOfRooms = 0;
     return `
     <div class="row">
   <div class="col-12">
         <div class="card" data-room-id="${roomDetails._id}">
-            <div class="card-header text-center fs-4 fw-semibold">${roomDetails.name}</div>
+            <div class="card-header text-center fs-3 fw-bold">${roomDetails.name}</div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-3">
                         <div class="mw-100 image-container"><img class="mw-100" src="${
                             roomDetails.images[0]
                         }" alt="room image" /></div>
-                        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                          
+                        <div id="carouselControls-${index}" class="carousel slide mt-2" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                ${
+                                    (function(){
+                                        return roomDetails.images.map((img, index) => {
+                                            return `<div class="carousel-item ${index == 0 ? 'active': ''}"><img class="d-block mw-100" src="${img}" alt="room image" /></div>`
+                                        }).join('');
+                                    })()
+                                }
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselControls-${index}" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselControls-${index}" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div> 
                         </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                          <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                          <span class="visually-hidden">Next</span>
-                        </button>
-                      </div>
                     </div>
                     <div class="col-2">
-                        <h5 class="card-tittle">Features</h5>
+                        <h5 class="card-tittle fw-Semibold">Features</h5>
                         ${(function () {
                             let html = "<ul>";
                             roomDetails.features.forEach(
@@ -218,7 +229,7 @@ function buildRoomRow(roomDetails) {
                         })()}
                     </div>
                     <div class="col-2">
-                        <h5 class="card-tittle">Bath and Toilet Accessories</h5>
+                        <h5 class="card-tittle fw-Semibold">Bath and Toilet Accessories</h5>
                         ${(function () {
                             let html = "<ul>";
                             roomDetails.bathroomAccessories.forEach(
@@ -233,7 +244,7 @@ function buildRoomRow(roomDetails) {
                         })()}
                     </div>
                     <div class="col-2">
-                        <h5 class="card-tittle">Entertainment</h5>
+                        <h5 class="card-tittle fw-Semibold">Entertainment</h5>
                         ${(function () {
                             let html = "<ul>";
                             roomDetails.entertainment.forEach(
@@ -248,7 +259,7 @@ function buildRoomRow(roomDetails) {
                         })()}
                     </div>
                     <div class="col-3">
-                        <h5 class="card-tittle">Other</h5>
+                        <h5 class="card-tittle fw-Semibold">Other</h5>
                         ${(function () {
                             let html = "<ul>";
                             roomDetails.comforts.forEach(
@@ -265,7 +276,7 @@ function buildRoomRow(roomDetails) {
                 </div>
             </div>
             <div class="card-footer d-flex flex-row justify-content-around">
-                <span class="float-right">Price per night ${
+                <span class="float-right fw-bold">Price per night ${
                     roomDetails.pricePerNight
                 }
                 </span>
@@ -285,7 +296,7 @@ function buildRoomRow(roomDetails) {
 
 function buildSelectedRoom(roomDetails){
     return`
-    <div class="card mb-3" id="room-${roomDetails._id}" style="max-width: 540px;">
+    <div class="card mb-2 mt-2" id="room-${roomDetails._id}" style="max-width: 540px;">
         <div class="row g-0 selected-room">
             <div class="col-md-4">
                 <img src="${roomDetails.images[0]}" class="img-fluid rounded-start selected-room-image" alt="room image">
@@ -301,18 +312,15 @@ function buildSelectedRoom(roomDetails){
     `
 }    
 
-{/* <div class="row" id="room-${roomDetails._id}">
-        <div class="container">
-            <div class="card selected-room" >
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item " id="first-room-image">
-                        <div>
-                            <img class="mw-100 selected-room-image" src="${roomDetails.images[0]}" alt="room image"/>
-                            <span class="selected-room-name">${roomDetails.name}</span>
-                            <span class="selected-room-prize">${roomDetails.pricePerNight}</span>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+function TotalRoomSelection(){
+    return`
+        <div class="totalselection container">
+            <span>Total Amount</span>
+            <span class="totalsel"></span>
         </div>
-    </div> */}
+        <div class="totalroomselection">
+            <span>Total Room Selected</span>
+            <span class="totalroomsel"></span>
+        </div>
+    `
+}
