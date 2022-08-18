@@ -5,6 +5,7 @@ function availability() {
     const checkoutDate = new Date(
         document.querySelector(".input-ckeck-out").value
     );
+    var noOfDays=(checkoutDate-checkinDate)/(1000*3600*24);
     document.querySelector("#check-availability").remove();
     document.querySelector(".container-fluid").style.backgroundImage = "none";
     console.log(checkinDate, checkoutDate);
@@ -15,7 +16,10 @@ function availability() {
             window.selectedRoomDetail = {
                 "roomDetail" : [],
                 "totalAmmount" : 0,
-                "totalNoOfSelectedRoom" : 0
+                "totalNoOfSelectedRoom" : 0,
+                "NumberOfDays":0,
+                "CheckInDate":0,
+                "CheckOutDate":0
             }
             console.log(selectedRoomDetail);
             const roomDetailsContainer = document.createElement('div');
@@ -49,6 +53,12 @@ function availability() {
                     const selectedRoomId = e.target.closest('.card')?.dataset?.roomId;
                     const totalAmmountElement = heroContainer.querySelector('#totalamount');
                     const totalRoomSelected = heroContainer.querySelector('#totalroom');
+                    const totaldays=noOfDays;
+                    selectedRoomDetail.NumberOfDays=totaldays;
+                    let check_in=checkinDate;
+                    selectedRoomDetail.CheckInDate=check_in;
+                    let check_out=checkoutDate;
+                    selectedRoomDetail.CheckOutDate=check_out;
                    
                    
                     if (e.target.dataset.id == 'plus') {
