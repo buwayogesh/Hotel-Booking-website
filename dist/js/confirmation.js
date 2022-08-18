@@ -200,8 +200,7 @@ function validation(){
                    document.querySelector('.payment').remove();
                    var userId=response.id;
                    console.log(userId);
-                   var roomId = selectedRoomDetail.roomDetail._id;
-                   console.log(roomId);
+
 
                    const options = {
                     method: 'POST',
