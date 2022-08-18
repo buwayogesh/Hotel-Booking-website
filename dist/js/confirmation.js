@@ -227,3 +227,25 @@ function validation(){
 function rmvemlerror(){
     document.querySelector('.email-error').innerHTML="";
 }
+
+function removecarderror(){
+    document.querySelector('.card-error').innerHTML="";
+}
+function removenameerror(){
+    document.querySelector('.name-error').innerHTML="";
+}
+function removelname(){
+    document.querySelector('.lname-error').innerHTML="";
+}
+function removemobileerror(){
+    document.querySelector('.mobile-error').innerHTML="";
+}
+function removeaddrerror(){
+    document.querySelector('.address-error').innerHTML="";
+}
+function montherror(){
+    document.querySelector('.card-error').innerHTML="";
+}
+function yearerror(){
+    document.querySelector('.card-error').innerHTML="";
+}
