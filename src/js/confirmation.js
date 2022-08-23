@@ -8,15 +8,19 @@ function success(selectedRoomDetail) {
     paymentcard.id = "payment";
     paymentcard.className = "payment container d-flex flex-row col-md-12";
     let html = "<div>";
+    
     selectedRoomDetail.roomDetail.forEach((roomdetails) => {
-        html += buildSelectedRoomCard(roomdetails, selectedRoomDetail.roomDetail.length);
+        html += buildSelectedRoomCard(roomdetails, selectedRoomDetail.roomDetail.length,selectedRoomDetail.roomDetail._id);
+       
     });
+   
     html += "</div>" + paymentcarddet();
     paymentcard.innerHTML = html;
     document.querySelector(".container-fluid").appendChild(paymentcard); 
     
 }
 function buildSelectedRoomCard(roomdetails, noOfRooms) {
+   
     return `
     
     <div class="card card-change col-md-12 mt-2">
@@ -61,9 +65,9 @@ function paymentcarddet() {
                         <div class="fab fa-cc-visa ps-3"></div>
                         <input type="text" class="form-control cardnumber" placeholder="Card Details" name="ccnumber" onfocus="removecarderror()">
                         <div class="d-flex w-50">
-                            <input type="text" class="form-control px-0 expirymonthandyear" placeholder="MM" name="expirymnthyr" onfocus="montherror()">
+                            <input type="text" class="form-control px-0 expirymonthandyear" placeholder="MM" name="expirymnthyr">
                             <span> / </span>
-                            <input type="text" class="form-control px-0 year" placeholder="YYYY" onfocus="yearerror()">
+                            <input type="text" class="form-control px-0 year" placeholder="YYYY">
                             <input type="password" maxlength=3 class="form-control px-0" placeholder="CVV">
                         </div>
                     </div>
@@ -127,10 +131,7 @@ function validation(){
      var today=new Date();
      var month=today.getMonth()+1;
      var year=today.getFullYear();
-     if(expmthyr < month || expyear < year){
-         document.querySelector('.card-error').innerHTML="Your Card is Expired";
-         isFormValid=false;
-     }
+     
     // if(expmthyr < today){
     //     document.querySelector('.card-error').innerHTML="Your Card is Expired";
     //     isFormValid=false;
@@ -204,23 +205,23 @@ function validation(){
                 if(response){
                    document.querySelector('.payment').remove();
                    var userId=response.id;
-                   console.log(userId);
-
-
-                   const options = {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: `{"roomId":"${selectedRoomDetail.roomDetail._id}","userId":"${userId}","bookingDate":"${new Date()}","checkIn":"${selectedRoomDetail.CheckInDate}","checkOut":"${ selectedRoomDetail.CheckOutDate}","noOfBookedRoom":"${selectedRoomDetail.totalNoOfSelectedRoom}","specialRequest":"","totalBillAmmount":"${selectedRoomDetail.totalAmmount}","ammountPaid":"${selectedRoomDetail.totalAmmount}","balanceRemaining":0}`
-                  };
-                  
-                  fetch('http://localhost:9000/hotel/v1/booking/', options)
-                    .then(response => response.json())
-                    .then(response => console.log(response))
-                    .catch(err => console.error(err));
+                   //console.log(selectedRoomDetail.roomDetail);
+                   selectedRoomDetail.roomDetail.forEach((findroomdetail)=>{
+                    var roomId=findroomdetail._id;
+                    const options = {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: `{"roomId":"${roomId}","userId":"${userId}","bookingDate":"${new Date()}","checkIn":"${selectedRoomDetail.CheckInDate}","checkOut":"${ selectedRoomDetail.CheckOutDate}","noOfBookedRoom":"${selectedRoomDetail.totalNoOfSelectedRoom}","specialRequest":"","totalBillAmmount":"${Number(selectedRoomDetail.totalAmmount) * Number(selectedRoomDetail.NumberOfDays)}","ammountPaid":"${selectedRoomDetail.totalAmmount}","balanceRemaining":0}`
+                      };
+                      
+                      fetch('http://localhost:9000/hotel/v1/booking/', options)
+                        .then(response => response.json())
+                        .then(response => console.log(response))
+                        .catch(err => console.error(err));
+                   })
                 }
                 
-            })
-            .catch(err => console.error(err));
+            });
     }   
     
  
@@ -243,9 +244,7 @@ function removemobileerror(){
 function removeaddrerror(){
     document.querySelector('.address-error').innerHTML="";
 }
-function montherror(){
-    document.querySelector('.card-error').innerHTML="";
-}
+
 function yearerror(){
     document.querySelector('.card-error').innerHTML="";
 }
